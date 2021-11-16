@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -22,19 +23,24 @@ public class GamePanel extends JPanel implements ActionListener {
 	Random random;
 	
 	GamePanel() {
+		
 		random = new Random();
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_WIDTH));
 		this.setBackground(Color.black);
-		this.setFocusable(false);
+		this.setFocusable(true);
 		this.addKeyListener(new myKeyAdapter());
 		startGame();
 	}
 	
 	public void startGame() {
-		
+		newApple();
+		running = true;
+		timer = new Timer(delay,this);
+		timer.start();
 	}
 	public void paintComponent(Graphics g) {
-		
+		super.paintComponent(g);
+		draw(g);
 	}
 	public void draw(Graphics g) {
 		
