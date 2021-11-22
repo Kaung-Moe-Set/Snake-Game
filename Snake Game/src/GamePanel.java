@@ -99,22 +99,22 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		
 		//check if head touches the left border
-		if(x[0]+UNIT_SIZE < 0) {
+		if(x[0] < 0) {
 			running = false;
 		}
 		
 		//check if head touches the right border
-		if((x[0]+UNIT_SIZE >= SCREEN_WIDTH)) {
+		if((x[0] > SCREEN_WIDTH)) {
 			running = false;
 		}
 		
 		//check if head touches the top border
-		if(y[0]+UNIT_SIZE < 0) {
+		if(y[0] < 0) {
 			running = false;
 		}
 		
 		//check if head touches the bottom border
-		if(y[0]+UNIT_SIZE >= SCREEN_HEIGHT) {
+		if(y[0] > SCREEN_HEIGHT) {
 			running = false;
 		}
 		
@@ -141,7 +141,28 @@ public class GamePanel extends JPanel implements ActionListener {
 	public class myKeyAdapter extends KeyAdapter{
 		@Override
 		public void keyPressed(KeyEvent e) {
-			
+			switch(e.getKeyCode()) {
+			case KeyEvent.VK_LEFT:
+				if(direction != 'R') {
+					direction = 'L';
+				}
+				break;
+			case KeyEvent.VK_RIGHT:
+				if(direction != 'L') {
+					direction = 'R';
+				}
+				break;
+			case KeyEvent.VK_DOWN:
+				if(direction != 'U') {
+					direction = 'D';
+				}
+				break;
+			case KeyEvent.VK_UP:
+				if(direction != 'D') {
+					direction = 'U';
+				}
+				break;
+			}
 		}
 	}
 }
