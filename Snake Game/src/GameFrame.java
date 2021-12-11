@@ -4,7 +4,10 @@ public class GameFrame extends JFrame {
 
 	GameFrame(boolean check) {
 	
-		this.add(new GamePanel());
+		if(check) 
+			this.add(new GamePanelMulti());
+		else
+			this.add(new GamePanel());
 		this.setTitle("Snake");
 		this.setResizable(false);
 		this.pack();
