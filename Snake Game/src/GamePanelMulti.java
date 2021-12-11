@@ -10,7 +10,7 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 	static final int SCREEN_HEIGHT = 600;
 	static final int UNIT_SIZE = 20;
 	static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
-	static final int delay = 500;
+	static final int delay = 250;
 	final int Ax[] = new int[GAME_UNITS];
 	final int Ay[] = new int[GAME_UNITS];
 	final int Bx[] = new int[GAME_UNITS];
@@ -140,13 +140,15 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 			break;
 		}
 	}
-	public void checkApple() {
+	public void AcheckApple() {
 		if((Ax[0] == appleX) && (Ay[0] == appleY)) {
 			AbodyParts++;
 			AapplesEaten++;
 			newApple();
 		}
-		if((Bx[0] == appleX) && (By[0] == appleY)) {
+	}
+	public void BcheckApple() {
+		if((Bx[0] == appleX) && (By[0]+position == appleY)) {
 			BbodyParts++;
 			BapplesEaten++;
 			newApple();
@@ -263,7 +265,8 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 		if(running) {
 			moveA();
 			moveB();
-			checkApple();
+			AcheckApple();
+			BcheckApple();
 			checkCollisions();
 		}
 		repaint();
