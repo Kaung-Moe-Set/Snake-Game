@@ -38,9 +38,10 @@ class Options implements ActionListener {
 		
 		if(e.getSource() == single) {
 			frame.dispose();
-			new GameFrame();
+			new GameFrame(false);
 		}else {
-			
+			frame.dispose();
+			new GameFrame(true);
 		}
 		
 	}

@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
-	GameFrame() {
+	GameFrame(boolean check) {
 	
 		this.add(new GamePanel());
 		this.setTitle("Snake");
