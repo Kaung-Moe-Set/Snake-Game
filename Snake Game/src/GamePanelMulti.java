@@ -15,19 +15,18 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 	final int Ay[] = new int[GAME_UNITS];
 	final int Bx[] = new int[GAME_UNITS];
 	final int By[] = new int[GAME_UNITS];
-	int AbodyParts = 2;
-	int BbodyParts = 2;
+	int AbodyParts = 4;
+	int BbodyParts = 4;
 	int AapplesEaten;
 	int BapplesEaten;
 	int appleX;
 	int appleY;
 	char Adirection = 'R';
-	char Bdirection = 'R';
+	char Bdirection = 'D';
 	boolean running = false;
 	Timer timer;
 	Random random;
 	boolean condition; //to check collisions and true is for red and false is for blue
-	int position = UNIT_SIZE*29;
 	
 	GamePanelMulti(){
 		
@@ -66,10 +65,12 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 			for(int i = 0; i<AbodyParts; i++) {
 				if(i == 0) {
 					g.setColor(Color.red);
+					g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
 					g.fillRect(Ax[i], Ay[i], UNIT_SIZE, UNIT_SIZE);
 				} 
 				else {
 					g.setColor(new Color(220,20,60));
+					//g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
 					g.fillRect(Ax[i], Ay[i], UNIT_SIZE, UNIT_SIZE);
 				}
 			}
@@ -78,11 +79,11 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 			for(int i = 0; i<BbodyParts; i++) {
 				if(i == 0) {
 					g.setColor(Color.blue);
-					g.fillRect(Bx[i], By[i]+position, UNIT_SIZE, UNIT_SIZE);
+					g.fillRect(Bx[i], By[i], UNIT_SIZE, UNIT_SIZE);
 				} 
 				else {
 					g.setColor(new Color(51,153,255));
-					g.fillRect(Bx[i], By[i]+position, UNIT_SIZE, UNIT_SIZE);
+					g.fillRect(Bx[i], By[i], UNIT_SIZE, UNIT_SIZE);
 				}
 			}
 			
@@ -148,7 +149,7 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 		}
 	}
 	public void BcheckApple() {
-		if((Bx[0] == appleX) && (By[0]+position == appleY)) {
+		if((Bx[0] == appleX) && (By[0] == appleY)) {
 			BbodyParts++;
 			BapplesEaten++;
 			newApple();
@@ -183,8 +184,24 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 			if(Ay[0] > SCREEN_HEIGHT) {
 				running = false;
 				condition = false;
-			}		
+			}
+			
+		//two snake collide	red win
+		for(int i=AbodyParts; i>0; i--) {
+			if(Bx[0] == Ax[i] && By[0] == Ay[i]) {
+				running = false;
+				condition = true;
+			}
+		}
 		
+		//two snake collide	red win
+		for(int i=BbodyParts; i>0; i--) {
+			if(Ax[0] == Bx[i] && Ay[0] == By[i]) {
+				running = false;
+				condition = false;
+			}
+		}
+				
 		//___________________________________________________
 		//For snake Blue
 		for( int i=BbodyParts; i>0; i--) {
@@ -207,13 +224,13 @@ public class GamePanelMulti extends JPanel implements ActionListener {
 		}
 			
 		//check if head touches the top border
-		if(By[0] < 0-SCREEN_HEIGHT) {
+		if(By[0] < 0) {
 			running = false;
 			condition = true;
 		}
 			
 		//check if head touches the bottom border
-		if(By[0] > 0) {
+		if(By[0] > SCREEN_HEIGHT) {
 			running = false;
 			condition = true;
 		}		
