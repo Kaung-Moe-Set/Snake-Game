@@ -1,9 +1,7 @@
-/Main.class
 /GameFrame.class
-/GamePanel.class
 /GamePanel$myKeyAdapter.class
-/Main$Options.class
-/Options.class
-/GamePanelMulti.class
-/GamePanelMulti$AUpAction.class
+/GamePanel.class
 /GamePanelMulti$myKeyAdapter.class
+/GamePanelMulti.class
+/Main.class
+/Options.class
